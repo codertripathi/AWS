@@ -1,0 +1,204 @@
+Simple Storage Service S3- This is object level storage. 
+Glacier - To pur archival data
+Cloud Front - Frequently access data to be stored at edge location of the customer
+EBS- Best storage solution if with your instances if you want to access storage very fast. This is block level storage.
+Storage Gateway - Appliance that you put in your local network which is software appliance or hardware appliance that act as vpn connection in amzone cloud.
+Snow Family - To move massive amount of data from local to cloud.
+Databases- Many database solution available.
+
+Block Storage - Is used always with local storage
+File Storage - S3. File as a object. Dealing with Object.
+
+
+
+Selecting Storage :-
+Size
+Performance
+Cost
+
+S3- Distribute across three availability zone. if using, Class 1A then it will use only one availability zone and will be less expensive.
+		- Supports Encryption
+
+S3 Concept -
+	-	Buckets
+	- 	Regions - Create a bucket close to region of users for good performance
+	-	Key
+	-	Object URLs - Each Object in a S3 has URL.
+	-	
+
+Note - Objects in S3 has inventual inconsistency
+	 - Objects in EBS are consistent
+Load data into S3 :-
+	- APIs
+	- Amazone Direct Connect - VPN connection from Enterprise network to AWS
+	- Storage Gateway - Storage your data locally and that will get sync with your S3 storage
+	- Kinesis Firehose - Large amount of analytical data to your S3 bucket.
+	- Transfer Acceleration - Works based on cloud front technology, Across the globe you wanted to upload the data to S3 bucket then Use cloudFront at the edge location to get it route to your S3 location. This is very costly.
+	- Snow Family Product 
+		- Snowball - Peta Bytes of data
+		- Snowball Edge - To store Many TB of data
+		- Snowmobile - To store exabytes of data
+		
+S3 provide storage level encryption not the transit encryption.
+
+Glacier :-
+Three Access Methods :-
+	-	Expedited (3-5 Minutes)
+	-	Standard (3-5 Hours)
+	-	Bulk (5-12 hours)
+
+Note - If you are trying to access glacier data very frequently then it will cost you more. Example - If you can wait to get data for one days and more then use Glacier. AES 256 encryption is enabled by default
+
+- Storage Gateway can connect to Glacier.
+
+Glacier Concept :-
+	- Archive
+	- Vaults -  In S3 we use to store in buckets and here we called them as vaults. Vaults can be configured to limit the cost.
+	- Vaults Locks - For security purpose
+	- Data Retrieval - Up to 5% retrieved at no charge , no rollover
+	
+	Hands On :-
+		- Go to AWS management console
+		- Create Vaults
+		- Then Give vaults name click next
+		- Choose option to Set Event Notifications and click Next.
+
+EBS : -
+	- Magnetic - Free
+	- SSD
+		- General Purpose
+		- Provisional IOPS
+	- EBS optimized Storage
+	- Throughtput optimized
+	- Cold HDD
+	
+	Data Protaction:-
+		- Snapshots
+		- Volume Recovery  - Attaching volume from one instance to other instance.
+		- Encryption Methods
+		
+	- 
+
+Note -  If you are creating a volume make sure you choose right availability zone. i.e. have your instance and EBS volume in same availability zone.
+
+EFS : - 
+	- It is sharable on network and it is heirachical structure file.
+	- Free 
+	- Can be used by EC2 instances.
+	- EFS is not supported on windows instances.
+	
+	
+
+AppStream :- Allows for virtual application to be accessed from the cloud.
+WorkSpaces : - WorkSpaces can create Linux or Windows virtual desktops in AWS. Each virtual desktop has a persistent storage D: drive and it is based on Windows Server
+			   (Hyper-V) 	virtualization.
+
+Elastic Transcoder : - The Elastic Transcoder can automatically convert video files placed in an S3 bucket.
+
+ElasticCache :- 
+	- In memory caching
+	- Memcached - Performance of redis better than Redis 
+	-Redis - HIPAA or PCI-DSS complaince
+	
+Security Services : -
+	- The Key Management Service is used to manage encryption Key pair.
+	- AWS supports Microsoft AD in the cloud.
+
+
+Analytics Engine : - It provide services ranging from search to detailed machine learning .
+	-	CloudSearch : - Powerfull Indexing engine with in AWS.
+	-	ElasticSearch
+	-	QuickSight - This is not a built in include tool with AWS.
+	-	Athena - To query your s3 buckets. It support ansii SQL.
+	
+Cloud9 - AWS IDE
+AWS X-Ray : - Makes it easy for developers to analyze the behaviour of their distributed application.
+
+CodeBuild - is used to test code in cloud.
+CodeDeploy - is used to deploy code across required instances. AWS Code Deploy is used to automate code implementation and deployment.
+CodeStar - is a full code building and deployment tool for AWS solution.
+	
+	
+Well Architected Framework :-
+	- Operation Excellence
+			- Prepare - Understand Workload and expected behaviour
+						- Consideration
+							- Operational priorities.
+							- Design for operation.
+							- Operational Readiness
+			- Operate
+					- Monitoring 
+						-	Environment Health
+						-	Discover business and technical insight
+					- Respond
+						-	Security
+						-	Reliability
+						-	Performance
+						- 	Cost
+			- Evolve
+					- Learn from experience
+					- Share learning
+					- Improve
+					- Scale
+					
+	- Security
+	- Reliability
+	- Perfornace Efficiency
+	- Cost Optimization
+	
+	
+Resilient Design : -
+	- Provide Reliability
+	- Automation
+		-	Recovery
+		-	Scaling
+		-	Backups
+		
+Design Principles :-
+		-	Test Recovery Procedures
+		-	Automatically recovery from failure
+		-	Scale horizantally to increase aggregate system availabilty
+		- 	Stop guessing Capacity
+		-	Manage change in automation - to automate scale in or scale out servers
+
+Performant Design :-
+		-	Democratize advanced technologies
+		-	Go global in minutes
+		-	Use serverless architecture
+		-	Experiment more often
+		-	Mechanical Sympathy
+
+Secure Design : -
+		-	Implement Strong identity foundation
+		-	Enable Traceability
+		-	Apply security at all layers.
+		-	Automate security Best practice
+		-	Protect data in transit and at rest
+		-	Keep people away from from data.
+		-	Prepare for security events
+		
+	- Detective Controls
+	- Infrastructure protection
+	- Data Protection
+
+Cost Optimization : -
+		-	Adopt a consumption model
+		-	Measure overall efficiency
+		-	Stop spending money on data centers
+		-	Analize and attribute expendature
+		-	Use manage services to reduce cost of ownership.
+		- 	Match Supply with demand
+		-	Expenditure awareness.
+		
+
+M3,M4,M5 have no burst performance - good instances for developement and testing
+
+Compute optimized instances - C5,C4,C3 -  - Useful for compute intensive applications
+
+Memory Optimized Instances - X1e, X1,R4,R3 - Useful for high memory requirements like processing large datasets and In-memory datasets, bigdata processing.
+
+Storage Optimized - H1,I3, and D2 - Useful for sequncial read and write to local storage , relational databases, data warehousing, image processing.
+
+Advance Computing - P3, P2, G3, and F1 - Useful for specialty hardware compute requirement. Like - Graphics processing, Field programmable gate array.
+
+- Default tenancy of of ec2 instance are shared.
